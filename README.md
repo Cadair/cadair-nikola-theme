@@ -8,6 +8,8 @@ needs a little work. It is based around a simple homepage with a pretty picture
 in a bootstrap3 jumbotron. It also includes the IPython css so it should work
 ok with IPython notebooks.
 
+Preview: http://i.imgur.com/wCcE7kx.png
+
 ##Customising
 
 If you create a sub-theme of this theme and create a template which is a copy
