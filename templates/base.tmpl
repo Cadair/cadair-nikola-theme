@@ -83,6 +83,15 @@ lang="${lang}">
 
 
 ${bootstrap.late_load_js()}
+<!-- Add Jumbotron scroll js -->
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+$(window).scroll(function() {
+  var scrolledY = $(window).scrollTop();
+    $('.jumbotron').css('background-position', 'left ' + ((scrolledY)) + 'px');
+    });
+    });//]]>  
+</script>
 ${base.html_social()}
     <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     <%block name="extra_js"></%block>
