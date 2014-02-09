@@ -13,6 +13,7 @@ lang="${lang}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     ${bootstrap.html_head()}
     <!-- My css -->
+    <%block name="social_links"></%block>
     <link href="/assets/css/ipython.min.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="assets/css/typeplate.css" /> 
@@ -49,6 +50,13 @@ lang="${lang}">
         %endif
 
         <ul class="nav navbar-nav navbar-right">
+            <!--Add Links to social media sites -->
+            % try:
+                ${cadair_social_links}
+            % except:
+                <!-- pass --> 
+            % endtry
+
             <%block name="belowtitle">
             %if len(translations) > 1:
                 <li>${bootstrap.html_translations()}</li>
