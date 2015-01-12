@@ -1,32 +1,20 @@
 ## -*- coding: utf-8 -*-
 <%namespace name="base" file="base_helper.tmpl" import="*" />
-<%namespace name="bootstrap" file="bootstrap_helper.tmpl" import="*" />
+<%namespace name="bootstrap" file="base_helper.tmpl" import="*" />
 <%namespace name="notes" file="annotation_helper.tmpl" import="*" />
 ${set_locale(lang)}
-<!DOCTYPE html>
-<html
-%if comment_system == 'facebook':
-xmlns:fb="http://ogp.me/ns/fb#"
-%endif
-lang="${lang}">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    ${bootstrap.html_head()}
-    <!-- My css -->
-    <%block name="social_links"></%block>
-    <link href="/assets/css/ipython.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="assets/css/typeplate.css" /> 
-    <link rel="stylesheet" media="screen" href="http://openfontlibrary.org/face/railway-sans" rel="stylesheet" type="text/css"/>
-    <%block name="extra_head">
-    </%block>
-    % if annotations and post and not post.meta('noannotations'):
-        ${notes.css()}
-    % elif not annotations and post and post.meta('annotations'):
-        ${notes.css()}
-    % endif
-    ${extra_head_data}
+
+${base.html_headstart()}
+  <link href="/assets/css/ipython.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="assets/css/typeplate.css" />
+  <link rel="stylesheet" media="screen" href="http://openfontlibrary.org/face/railway-sans" rel="stylesheet" type="text/css"/>
+  <%block name="extra_head">
+  ### Leave this block alone.
+  </%block>
+  ${template_hooks['extra_head']()}
 </head>
+
 <body>
 <!-- Menubar -->
 
@@ -54,7 +42,7 @@ lang="${lang}">
             % try:
                 ${cadair_social_links}
             % except:
-                <!-- pass --> 
+                <!-- pass -->
             % endtry
 
             <%block name="belowtitle">
@@ -75,38 +63,42 @@ lang="${lang}">
 <%block name="jumbo"></%block>
 
 <div class="container">
-    <div class="body-content">
-        <!--Body content-->
-        <div class="row">
-            <%block name="content"></%block>
-        </div>
-        <!--End of body content-->
+  <!--Body content-->
+  <div class="row">
+      ${template_hooks['page_header']()}
+      <%block name="content"></%block>
+  </div>
 
-        <footer>
-            <hr></hr>
-            ${content_footer}
-        </footer>
-    </div>
+  <div class="footerbox">
+    ${content_footer}
+    ${template_hooks['page_footer']()}
+  </div>
+<!--End of body content-->
 </div>
-
-
 ${bootstrap.late_load_js()}
 <!-- Add Jumbotron scroll js -->
-<script type='text/javascript'>//<![CDATA[ 
+<script type='text/javascript'>//<![CDATA[
 $(window).load(function(){
-$(window).scroll(function() {
-  var scrolledY = $(window).scrollTop();
+  $(window).scroll(function() {
+    var scrolledY = $(window).scrollTop();
     $('.jumbotron').css('background-position', 'left ' + ((scrolledY)) + 'px');
-    });
-    });//]]>  
+  });
+});//]]>
 </script>
-${base.html_social()}
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
-    <%block name="extra_js"></%block>
-    % if annotations and post and not post.meta('noannotations'):
-        ${notes.code()}
-    % elif not annotations and post and post.meta('annotations'):
-        ${notes.code()}
-    % endif
+<script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<!-- fancy dates -->
+<script>
+moment.locale("${momentjs_locales[lang]}");
+fancydates(${date_fanciness}, ${js_date_format});
+</script>
+<!-- end fancy dates -->
+<%block name="extra_js"></%block>
+% if annotations and post and not post.meta('noannotations'):
+${notes.code()}
+% elif not annotations and post and post.meta('annotations'):
+${notes.code()}
+% endif
 ${body_end}
+${template_hooks['body_end']()}
 </body>
+</html>

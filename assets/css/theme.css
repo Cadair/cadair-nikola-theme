@@ -8,13 +8,27 @@ body {
 	font-family: 'Railway';
 	background-color: #f7fffb;
 	font-size: large;
+	hyphens: manual;
+	-webkit-hyphens: manual;
+	-moz-hyphens: manual;
 }
 
-.body-content h1 {
+.container h1 {
 	text-align: center;
 	font-size: 450%;
 	font-weight: bold;
 	font-family: 'Railway';
+}
+
+h1 a {
+	color: #222222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0.2em;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
 }
 
 .jumbotron {
