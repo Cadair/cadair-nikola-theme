@@ -92,6 +92,23 @@ moment.locale("${momentjs_locales[lang]}");
 fancydates(${date_fanciness}, ${js_date_format});
 </script>
 <!-- end fancy dates -->
+<!-- Abstract hide/show 
+<script src"/assets/js/div_toggle.js"></script>
+-->
+<script type='text/javascript'>
+function toggle(showHideDiv, switchTextDiv) {
+    var ele = document.getElementById(showHideDiv);
+    var text = document.getElementById(switchTextDiv);
+    if(ele.style.display == "none") {
+        ele.style.display = "block";
+        text.innerHTML = "[hide abstract]";
+    }
+    else {
+            ele.style.display = "none";
+            text.innerHTML = "[show abstract]";
+    }
+}
+</script>
 <%block name="extra_js"></%block>
 % if annotations and post and not post.meta('noannotations'):
 ${notes.code()}

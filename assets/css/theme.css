@@ -60,6 +60,16 @@ footer {
 	margin-bottom: 5px;
 }
 
+.papertitle {
+    display: block;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.paperblock {
+    padding-bottom: 1em;
+}
+
 /* YouTube responsive embed from
 See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.bOTFuSnA.dpuf
  */
